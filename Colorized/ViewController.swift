@@ -21,23 +21,22 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         colorView.layer.cornerRadius = 15
+        setViewColor()
+        setLabelValue()
     }
     
-    @IBAction func redSliderTapped() {
-        redLabelValue.text = String(format: "%.2f", redSlider.value)
-        setViewColor()
-    }
     
-    @IBAction func greenSliderTapped() {
-        greenLabelValue.text = String(format: "%.2f", greenSlider.value)
+    @IBAction func sliderTapped(_ sender: UISlider) {
         setViewColor()
-    }
-    
-    @IBAction func blueSliderTapped() {
-        blueLabelValue.text = String(format: "%.2f", blueSlider.value)
-        setViewColor()
+        switch sender {
+        case redSlider:
+            redLabelValue.text = string(from: sender)
+        case greenSlider:
+            greenLabelValue.text = string(from: sender)
+        default:
+            blueLabelValue.text = string(from: sender)
+        }
     }
     
     private func setViewColor() {
@@ -45,7 +44,17 @@ class ViewController: UIViewController {
             red: CGFloat(redSlider.value),
             green: CGFloat(greenSlider.value),
             blue: CGFloat(blueSlider.value),
-            alpha: 1.0
+            alpha: 1
         )
+    }
+    
+    private func setLabelValue() {
+        redLabelValue.text = string(from: redSlider)
+        greenLabelValue.text = string(from: greenSlider)
+        blueLabelValue.text = string(from: blueSlider)
+    }
+    
+    private func string(from slider: UISlider) -> String {
+        String(format: "%.2f", slider.value)
     }
 }
