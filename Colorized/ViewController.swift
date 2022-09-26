@@ -23,34 +23,29 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         colorView.layer.cornerRadius = 15
-        
-        setUp(redSlider)
-        setUp(greenSlider)
-        setUp(blueSlider)
-    }
-    
-    override func viewWillLayoutSubviews() {
-        colorView.backgroundColor = UIColor(
-            red: CGFloat(redSlider.value),
-            green: CGFloat(greenSlider.value),
-            blue: CGFloat(blueSlider.value),
-            alpha: 1.0)
     }
     
     @IBAction func redSliderTapped() {
         redLabelValue.text = String(format: "%.2f", redSlider.value)
+        setViewColor()
     }
     
     @IBAction func greenSliderTapped() {
         greenLabelValue.text = String(format: "%.2f", greenSlider.value)
+        setViewColor()
     }
     
     @IBAction func blueSliderTapped() {
         blueLabelValue.text = String(format: "%.2f", blueSlider.value)
+        setViewColor()
     }
     
-    private func setUp(_ slider: UISlider) {
-        slider.minimumValue = 1.00
-        slider.minimumValue = 0.00
+    private func setViewColor() {
+        colorView.backgroundColor = UIColor(
+            red: CGFloat(redSlider.value),
+            green: CGFloat(greenSlider.value),
+            blue: CGFloat(blueSlider.value),
+            alpha: 1.0
+        )
     }
 }
