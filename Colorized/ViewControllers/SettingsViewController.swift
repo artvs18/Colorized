@@ -25,7 +25,7 @@ class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         colorView.layer.cornerRadius = 15
-        setSlidersValue(for: mainColor)
+        setSlidersValue()
         setViewColor()
         setLabelValue()
     }
@@ -64,7 +64,7 @@ extension SettingsViewController {
         blueLabelValue.text = string(from: blueSlider)
     }
     
-    private func setSlidersValue(for color: UIColor) {
+    private func setSlidersValue() {
         redSlider.value = Float(mainColor.redValue)
         blueSlider.value = Float(mainColor.blueValue)
         greenSlider.value = Float(mainColor.greenValue)
