@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  SettingsViewController.swift
 //  Colorized
 //
 //  Created by Artemy Volkov on 23.09.2022.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class SettingsViewController: UIViewController {
     
     @IBOutlet var colorView: UIView!
     
@@ -19,13 +19,16 @@ class ViewController: UIViewController {
     @IBOutlet var greenSlider: UISlider!
     @IBOutlet var blueSlider: UISlider!
     
+    var mainColor: UIColor!
+    var delegate: settingsViewControllerDelegate!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         colorView.layer.cornerRadius = 15
+        setSlidersValue(for: mainColor)
         setViewColor()
         setLabelValue()
     }
-    
     
     @IBAction func sliderTapped(_ sender: UISlider) {
         setViewColor()
@@ -39,6 +42,13 @@ class ViewController: UIViewController {
         }
     }
     
+    @IBAction func doneButtonDidTapped() {
+        delegate.setColor(with: colorView.backgroundColor)
+        dismiss(animated: true)
+    }
+}
+
+extension SettingsViewController {
     private func setViewColor() {
         colorView.backgroundColor = UIColor(
             red: CGFloat(redSlider.value),
@@ -52,6 +62,12 @@ class ViewController: UIViewController {
         redLabelValue.text = string(from: redSlider)
         greenLabelValue.text = string(from: greenSlider)
         blueLabelValue.text = string(from: blueSlider)
+    }
+    
+    private func setSlidersValue(for color: UIColor) {
+        redSlider.value = Float(mainColor.redValue)
+        blueSlider.value = Float(mainColor.blueValue)
+        greenSlider.value = Float(mainColor.greenValue)
     }
     
     private func string(from slider: UISlider) -> String {
