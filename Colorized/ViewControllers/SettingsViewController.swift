@@ -167,6 +167,7 @@ extension SettingsViewController: UITextFieldDelegate {
             )
             return
         }
+        
         if colorValue >= 0 && colorValue <= 1 {
             switch textField {
             case redColorTF:
@@ -189,9 +190,5 @@ extension SettingsViewController: UITextFieldDelegate {
                 textField: textField
             )
         }
-        
-        
     }
 }
-
-
