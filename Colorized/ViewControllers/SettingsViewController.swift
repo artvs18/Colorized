@@ -47,9 +47,6 @@ class SettingsViewController: UIViewController {
         view.endEditing(true)
     }
     
-    @IBAction func changeColorValueTF(_ sender: UITextField) {
-    }
-    
     @IBAction func sliderTapped(_ sender: UISlider) {
         setViewColor()
         setTFValues()

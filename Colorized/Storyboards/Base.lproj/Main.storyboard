@@ -113,25 +113,16 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="50" height="36.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
-                                                        <connections>
-                                                            <action selector="changeColorValueTF:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="1CN-Cl-jRF"/>
-                                                        </connections>
                                                     </textField>
                                                     <textField opaque="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Aaf-8i-6xN">
                                                         <rect key="frame" x="0.0" y="44.5" width="50" height="36"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
-                                                        <connections>
-                                                            <action selector="changeColorValueTF:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="44N-we-kPb"/>
-                                                        </connections>
                                                     </textField>
                                                     <textField opaque="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="drd-gm-1NI">
                                                         <rect key="frame" x="0.0" y="88.5" width="50" height="36.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
-                                                        <connections>
-                                                            <action selector="changeColorValueTF:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="Iom-UP-OuN"/>
-                                                        </connections>
                                                     </textField>
                                                 </subviews>
                                                 <constraints>
