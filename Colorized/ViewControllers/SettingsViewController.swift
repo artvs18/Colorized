@@ -39,6 +39,10 @@ class SettingsViewController: UIViewController {
         blueColorTF.delegate = self
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        setViewColor()
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }
