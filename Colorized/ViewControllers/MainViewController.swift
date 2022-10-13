@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol settingsViewControllerDelegate {
+protocol SettingsViewControllerDelegate {
     func setColor(with color: UIColor!)
 }
 
@@ -21,7 +21,8 @@ class MainViewController: UIViewController {
     }
 }
 
-extension MainViewController: settingsViewControllerDelegate {
+// MARK: - SettingsViewControllerDelegate
+extension MainViewController: SettingsViewControllerDelegate {
     func setColor(with color: UIColor!) {
         view.backgroundColor = color
     }
