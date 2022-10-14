@@ -186,11 +186,11 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="#FFFFFFFFF" borderStyle="roundedRect" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="3PR-Sv-7w9">
-                                <rect key="frame" x="95" y="300" width="130" height="34"/>
+                                <rect key="frame" x="92.5" y="300" width="135" height="34"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="130" id="2mP-Mu-Atg"/>
+                                    <constraint firstAttribute="width" constant="135" id="2mP-Mu-Atg"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                             </textField>
                         </subviews>
