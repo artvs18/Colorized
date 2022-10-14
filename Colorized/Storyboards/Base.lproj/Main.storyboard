@@ -87,30 +87,30 @@
                                                         <rect key="frame" x="-2" y="0.0" width="137" height="42.5"/>
                                                         <color key="minimumTrackTintColor" systemColor="systemRedColor"/>
                                                         <connections>
-                                                            <action selector="sliderShifted:" destination="BYZ-38-t0r" eventType="valueChanged" id="gUO-nX-Tor"/>
+                                                            <action selector="sliderShifted:" destination="BYZ-38-t0r" eventType="valueChanged" id="BNE-yS-Nw5"/>
                                                         </connections>
                                                     </slider>
                                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="EBD-fB-REy">
                                                         <rect key="frame" x="-2" y="41.5" width="137" height="43"/>
                                                         <color key="minimumTrackTintColor" systemColor="systemGreenColor"/>
                                                         <connections>
-                                                            <action selector="sliderShifted:" destination="BYZ-38-t0r" eventType="valueChanged" id="J4y-ba-goK"/>
+                                                            <action selector="sliderShifted:" destination="BYZ-38-t0r" eventType="valueChanged" id="hqZ-Vk-BZB"/>
                                                         </connections>
                                                     </slider>
                                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="n6c-O9-Yq7">
                                                         <rect key="frame" x="-2" y="83.5" width="137" height="42.5"/>
                                                         <color key="minimumTrackTintColor" systemColor="systemBlueColor"/>
                                                         <connections>
-                                                            <action selector="sliderShifted:" destination="BYZ-38-t0r" eventType="valueChanged" id="dOQ-p3-yzB"/>
+                                                            <action selector="sliderShifted:" destination="BYZ-38-t0r" eventType="valueChanged" id="ctm-6O-JE9"/>
                                                         </connections>
                                                     </slider>
                                                 </subviews>
                                             </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="xJX-Fg-qZX">
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="xJX-Fg-qZX">
                                                 <rect key="frame" x="238" y="0.0" width="50" height="125"/>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zRU-NI-dkb">
-                                                        <rect key="frame" x="0.0" y="0.0" width="50" height="41.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="50" height="38.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                                         <connections>
@@ -118,7 +118,7 @@
                                                         </connections>
                                                     </textField>
                                                     <textField opaque="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Aaf-8i-6xN">
-                                                        <rect key="frame" x="0.0" y="41.5" width="50" height="42"/>
+                                                        <rect key="frame" x="0.0" y="43.5" width="50" height="38"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                                         <connections>
@@ -126,7 +126,7 @@
                                                         </connections>
                                                     </textField>
                                                     <textField opaque="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="drd-gm-1NI">
-                                                        <rect key="frame" x="0.0" y="83.5" width="50" height="41.5"/>
+                                                        <rect key="frame" x="0.0" y="86.5" width="50" height="38.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                                         <connections>

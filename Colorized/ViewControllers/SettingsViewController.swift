@@ -28,6 +28,7 @@ class SettingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         colorView.layer.cornerRadius = 15
         colorView.backgroundColor = mainColor
         
@@ -76,7 +77,7 @@ extension SettingsViewController {
         labels.forEach { label in
             switch label {
             case redLabelValue: label.text = string(from: redSlider)
-            case greenSlider: label.text = string(from: greenSlider)
+            case greenLabelValue: label.text = string(from: greenSlider)
             default: label.text = string(from: blueSlider)
             }
         }
@@ -123,19 +124,6 @@ extension SettingsViewController {
         alert.addAction(okAction)
         present(alert, animated: true)
     }
-    
-    private func converter(text: String) -> String {
-        var newText: String = ""
-        
-        for character in text {
-            if character == "," {
-                newText.append(".")
-            } else {
-                newText.append(character)
-            }
-        }
-        return newText
-    }
 }
 
 extension SettingsViewController: UITextFieldDelegate {
@@ -143,21 +131,20 @@ extension SettingsViewController: UITextFieldDelegate {
         guard let newValue = textField.text else {
             showAlert(
                 with: "Wrong format!",
-                and: "Please enter decimal value",
-                textField: textField
-            )
-            return
-        }
-        guard let colorValue = Float(converter(text: newValue)),
-              (0...1).contains(colorValue) else {
-            showAlert(
-                with: "Wrong format!",
-                and: "Please enter decimal value",
+                and: "Please enter decimal value between 0 and 1",
                 textField: textField
             )
             return
         }
         
+        guard let colorValue = Float(newValue), (0...1).contains(colorValue) else {
+            showAlert(
+                with: "Wrong format!",
+                and: "Please enter decimal value between 0 and 1",
+                textField: textField
+            )
+            return
+        }
         switch textField {
         case redColorTF:
             redSlider.setValue(colorValue, animated: true)
@@ -171,6 +158,23 @@ extension SettingsViewController: UITextFieldDelegate {
         }
         
         setViewColor()
+    }
+    
+    func textField(
+        _ textField: UITextField,
+        shouldChangeCharactersIn range: NSRange,
+        replacementString string: String
+    ) -> Bool {
+        let currentText = textField.text ?? ""
+        guard let stringRange = Range(range, in: currentText) else { return false }
+        let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
+        
+        if string == "," {
+            textField.text = textField.text! + "."
+            return false
+        }
+        
+        return true && updatedText.count <= 4
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
