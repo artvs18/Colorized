@@ -11,17 +11,22 @@ class SettingsViewController: UIViewController {
     
     @IBOutlet var colorView: UIView!
     
-    @IBOutlet var redLabelValue: UILabel!
-    @IBOutlet var greenLabelValue: UILabel!
-    @IBOutlet var blueLabelValue: UILabel!
+    @IBOutlet var redLabel: UILabel!
+    @IBOutlet var greenLabel: UILabel!
+    @IBOutlet var blueLabel: UILabel!
+    @IBOutlet var alphaLabel: UILabel!
     
     @IBOutlet var redSlider: UISlider!
     @IBOutlet var greenSlider: UISlider!
     @IBOutlet var blueSlider: UISlider!
+    @IBOutlet var alphaSlider: UISlider!
     
-    @IBOutlet var redColorTF: UITextField!
-    @IBOutlet var greenColorTF: UITextField!
-    @IBOutlet var blueColorTF: UITextField!
+    @IBOutlet var redTF: UITextField!
+    @IBOutlet var greenTF: UITextField!
+    @IBOutlet var blueTF: UITextField!
+    @IBOutlet var alphaTF: UITextField!
+    
+    @IBOutlet var hexTF: UITextField!
     
     var mainColor: UIColor!
     var delegate: SettingsViewControllerDelegate!
@@ -32,9 +37,11 @@ class SettingsViewController: UIViewController {
         colorView.layer.cornerRadius = 15
         colorView.backgroundColor = mainColor
         
-        setValue(for: redSlider, greenSlider, blueSlider)
-        setValue(for: redLabelValue, greenLabelValue, blueLabelValue)
-        setValue(for: redColorTF, greenColorTF, blueColorTF)
+        hexTF.text = colorToHex(mainColor)
+        
+        setValue(for: redSlider, greenSlider, blueSlider, alphaSlider)
+        setValue(for: redLabel, greenLabel, blueLabel, alphaLabel)
+        setValue(for: redTF, greenTF, blueTF, alphaTF)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -45,16 +52,20 @@ class SettingsViewController: UIViewController {
     @IBAction func sliderShifted(_ sender: UISlider) {
         switch sender {
         case redSlider:
-            setValue(for: redLabelValue)
-            setValue(for: redColorTF)
+            setValue(for: redLabel)
+            setValue(for: redTF)
         case greenSlider:
-            setValue(for: greenLabelValue)
-            setValue(for: greenColorTF)
+            setValue(for: greenLabel)
+            setValue(for: greenTF)
+        case blueSlider:
+            setValue(for: blueLabel)
+            setValue(for: blueTF)
         default:
-            setValue(for: blueLabelValue)
-            setValue(for: blueColorTF)
+            setValue(for: alphaLabel)
+            setValue(for: alphaTF)
         }
         setViewColor()
+        setHexTextView()
     }
     
     @IBAction func doneButtonDidTapped() {
@@ -69,16 +80,28 @@ extension SettingsViewController {
             red: CGFloat(redSlider.value),
             green: CGFloat(greenSlider.value),
             blue: CGFloat(blueSlider.value),
-            alpha: 1
+            alpha: CGFloat(alphaSlider.value)
+        )
+    }
+    
+    private func setHexTextView() {
+        hexTF.text = colorToHex(
+            UIColor(
+                red: CGFloat(redSlider.value),
+                green: CGFloat(greenSlider.value),
+                blue: CGFloat(blueSlider.value),
+                alpha: CGFloat(alphaSlider.value)
+            )
         )
     }
     
     private func setValue(for labels: UILabel...) {
         labels.forEach { label in
             switch label {
-            case redLabelValue: label.text = string(from: redSlider)
-            case greenLabelValue: label.text = string(from: greenSlider)
-            default: label.text = string(from: blueSlider)
+            case redLabel: label.text = string(from: redSlider)
+            case greenLabel: label.text = string(from: greenSlider)
+            case blueLabel: label.text = string(from: blueSlider)
+            default: label.text = string(from: alphaSlider)
             }
         }
     }
@@ -89,7 +112,8 @@ extension SettingsViewController {
             switch slider {
             case redSlider: slider.value = Float(ciColor.red)
             case greenSlider: slider.value = Float(ciColor.green)
-            default: slider.value = Float(ciColor.blue)
+            case blueSlider: slider.value = Float(ciColor.blue)
+            default: slider.value = Float(ciColor.alpha)
             }
         }
     }
@@ -97,9 +121,10 @@ extension SettingsViewController {
     private func setValue(for textFields: UITextField...) {
         textFields.forEach { textField in
             switch textField {
-            case redColorTF: textField.text = string(from: redSlider)
-            case greenColorTF: textField.text = string(from: greenSlider)
-            default: textField.text = string(from: blueSlider)
+            case redTF: textField.text = string(from: redSlider)
+            case greenTF: textField.text = string(from: greenSlider)
+            case blueTF: textField.text = string(from: blueSlider)
+            default: textField.text = string(from: alphaSlider)
             }
         }
     }
@@ -146,18 +171,22 @@ extension SettingsViewController: UITextFieldDelegate {
             return
         }
         switch textField {
-        case redColorTF:
+        case redTF:
             redSlider.setValue(colorValue, animated: true)
-            setValue(for: redLabelValue)
-        case greenColorTF:
+            setValue(for: redLabel)
+        case greenTF:
             greenSlider.setValue(colorValue, animated: true)
-            setValue(for: greenLabelValue)
-        default:
+            setValue(for: greenLabel)
+        case blueTF:
             blueSlider.setValue(colorValue, animated: true)
-            setValue(for: blueLabelValue)
+            setValue(for: blueLabel)
+        default:
+            alphaSlider.setValue(colorValue, animated: true)
+            setValue(for: alphaLabel)
         }
         
         setViewColor()
+        setHexTextView()
     }
     
     func textField(
