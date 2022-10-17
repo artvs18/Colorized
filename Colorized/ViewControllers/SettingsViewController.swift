@@ -11,11 +11,6 @@ class SettingsViewController: UIViewController {
     
     @IBOutlet var colorView: UIView!
     
-    @IBOutlet var redLabel: UILabel!
-    @IBOutlet var greenLabel: UILabel!
-    @IBOutlet var blueLabel: UILabel!
-    @IBOutlet var alphaLabel: UILabel!
-    
     @IBOutlet var redSlider: UISlider!
     @IBOutlet var greenSlider: UISlider!
     @IBOutlet var blueSlider: UISlider!
@@ -34,13 +29,12 @@ class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        colorView.layer.cornerRadius = 15
+        colorView.layer.cornerRadius = 44
         colorView.backgroundColor = mainColor
         
         hexTF.text = colorToHex(mainColor)
         
         setValue(for: redSlider, greenSlider, blueSlider, alphaSlider)
-        setValue(for: redLabel, greenLabel, blueLabel, alphaLabel)
         setValue(for: redTF, greenTF, blueTF, alphaTF)
     }
     
@@ -52,16 +46,12 @@ class SettingsViewController: UIViewController {
     @IBAction func sliderShifted(_ sender: UISlider) {
         switch sender {
         case redSlider:
-            setValue(for: redLabel)
             setValue(for: redTF)
         case greenSlider:
-            setValue(for: greenLabel)
             setValue(for: greenTF)
         case blueSlider:
-            setValue(for: blueLabel)
             setValue(for: blueTF)
         default:
-            setValue(for: alphaLabel)
             setValue(for: alphaTF)
         }
         setViewColor()
@@ -69,7 +59,7 @@ class SettingsViewController: UIViewController {
     }
     
     @IBAction func doneButtonDidTapped() {
-        delegate.setColor(with: colorView.backgroundColor)
+        delegate.setColor(with: colorView.backgroundColor ?? .white)
         dismiss(animated: true)
     }
 }
@@ -93,17 +83,6 @@ extension SettingsViewController {
                 alpha: CGFloat(alphaSlider.value)
             )
         )
-    }
-    
-    private func setValue(for labels: UILabel...) {
-        labels.forEach { label in
-            switch label {
-            case redLabel: label.text = string(from: redSlider)
-            case greenLabel: label.text = string(from: greenSlider)
-            case blueLabel: label.text = string(from: blueSlider)
-            default: label.text = string(from: alphaSlider)
-            }
-        }
     }
     
     private func setValue(for sliders: UISlider...) {
@@ -153,40 +132,38 @@ extension SettingsViewController {
 
 extension SettingsViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
-        guard let newValue = textField.text else {
-            showAlert(
-                with: "Wrong format!",
-                and: "Please enter decimal value between 0 and 1",
-                textField: textField
-            )
-            return
+        if textField != hexTF {
+            guard let newValue = textField.text else {
+                showAlert(
+                    with: "Wrong format!",
+                    and: "Please enter decimal value between 0 and 1",
+                    textField: textField
+                )
+                return
+            }
+            
+            guard let colorValue = Float(newValue), (0...1).contains(colorValue) else {
+                showAlert(
+                    with: "Wrong format!",
+                    and: "Please enter decimal value between 0 and 1",
+                    textField: textField
+                )
+                return
+            }
+            switch textField {
+            case redTF:
+                redSlider.setValue(colorValue, animated: true)
+            case greenTF:
+                greenSlider.setValue(colorValue, animated: true)
+            case blueTF:
+                blueSlider.setValue(colorValue, animated: true)
+            default:
+                alphaSlider.setValue(colorValue, animated: true)
+            }
+            
+            setViewColor()
+            setHexTextView()
         }
-        
-        guard let colorValue = Float(newValue), (0...1).contains(colorValue) else {
-            showAlert(
-                with: "Wrong format!",
-                and: "Please enter decimal value between 0 and 1",
-                textField: textField
-            )
-            return
-        }
-        switch textField {
-        case redTF:
-            redSlider.setValue(colorValue, animated: true)
-            setValue(for: redLabel)
-        case greenTF:
-            greenSlider.setValue(colorValue, animated: true)
-            setValue(for: greenLabel)
-        case blueTF:
-            blueSlider.setValue(colorValue, animated: true)
-            setValue(for: blueLabel)
-        default:
-            alphaSlider.setValue(colorValue, animated: true)
-            setValue(for: alphaLabel)
-        }
-        
-        setViewColor()
-        setHexTextView()
     }
     
     func textField(
@@ -200,16 +177,20 @@ extension SettingsViewController: UITextFieldDelegate {
         
         if string == "," {
             textField.text = textField.text! + "."
-            return false
-        }
-        
-        return true && updatedText.count <= 4
+            return false && updatedText.count <= 4
+          }
+          
+        return updatedText.count <= 4
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         let keyboardToolbar = UIToolbar()
         keyboardToolbar.sizeToFit()
-        textField.inputAccessoryView = keyboardToolbar
+        
+        if textField != hexTF {
+            textField.inputAccessoryView = keyboardToolbar
+        }
+        
         
         let doneButton = UIBarButtonItem(
             barButtonSystemItem: .done,
@@ -224,5 +205,12 @@ extension SettingsViewController: UITextFieldDelegate {
         )
         
         keyboardToolbar.items = [flexBarButton, doneButton]
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == hexTF {
+           return textField.resignFirstResponder()
+        }
+        return false
     }
 }
